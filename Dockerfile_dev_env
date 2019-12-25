@@ -1,0 +1,9 @@
+# Build development environment
+FROM gcc:latest
+MAINTAINER yyhclimacool "yyhclimacool@gmail.com"
+WORKDIR /root/
+ENV IMAGE_BUILT_AT 20191225
+RUN apt update -y -qq
+RUN apt upgrade -y -qq
+RUN apt install -y -qq tree
+RUN apt install -y -qq clang
