@@ -20,3 +20,6 @@ RUN apt install -y -qq cmake
 RUN git config --global credential.helper store
 RUN git config --global user.email "yyhclimacool@gmail.com"
 RUN git config --global user.name "yyhclimacool"
+
+ADD .bashrc .
+ADD .vimrc .
