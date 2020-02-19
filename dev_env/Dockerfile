@@ -2,24 +2,21 @@
 
 FROM gcc:latest
 MAINTAINER yyhclimacool "yyhclimacool@gmail.com"
+LABEL maintainer="yyhclimacool@gmail.com"
+LABEL version="0.2"
+LABEL description="Personl development environment"
 
 WORKDIR /root/
-ENV IMAGE_BUILT_AT 20191225
-RUN touch README.md
-RUN echo "## yyhclimacool@gmail.com" > README.md
-RUN echo "### image built at : $IMAGE_BUILT_AT" >> README.md
+ENV IMAGE_BUILT_AT 20200219
 
-RUN apt update  -y -qq
-RUN apt upgrade -y -qq
-RUN apt install -y -qq vim
-RUN apt install -y -qq tree
-RUN apt install -y -qq clang
-RUN apt install -y -qq gdb
-RUN apt install -y -qq cmake
+RUN apt update -yqq && apt upgrade -yqq
+RUN apt install -yqq vim tree clang gdb cmake
 
-RUN git config --global credential.helper store
-RUN git config --global user.email "yyhclimacool@gmail.com"
-RUN git config --global user.name "yyhclimacool"
+RUN git config --global credential.helper store && \
+    git config --global user.email "yyhclimacool@gmail.com" && \
+    git config --global user.name "yyhclimacool"
 
 ADD .bashrc .
 ADD .vimrc .
+CMD echo "[CMD]Welcome to my dev docker!"
+ENTRYPOINT echo "[ENTRYPOINT]Welcome to my dev docker!"
