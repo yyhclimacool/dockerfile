@@ -18,5 +18,5 @@ RUN git config --global credential.helper store && \
 
 ADD .bashrc .
 ADD .vimrc .
-CMD echo "[CMD]Welcome to my dev docker!"
-ENTRYPOINT echo "[ENTRYPOINT]Welcome to my dev docker!"
+#CMD echo "[CMD]Welcome to my dev docker!"
+#ENTRYPOINT echo "[ENTRYPOINT]Welcome to my dev docker!"
