@@ -9,8 +9,11 @@ LABEL description="Personl development environment"
 WORKDIR /root/
 ENV IMAGE_BUILT_AT 20200219
 
+RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
 RUN apt update -yqq && apt upgrade -yqq
-RUN apt install -yqq vim tree clang gdb cmake
+RUN apt install -yq vim tree clang gdb cmake \
+    automake bison flex libboost-all-dev libevent-dev \
+    libssl-dev libtool make pkg-config python2-dev python3-dev
 
 RUN git config --global credential.helper store && \
     git config --global user.email "yyhclimacool@gmail.com" && \
