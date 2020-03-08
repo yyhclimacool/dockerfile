@@ -8,6 +8,7 @@ LABEL description="Personl development environment"
 
 WORKDIR /root/
 ENV IMAGE_BUILT_AT 20200219
+ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64
 
 RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
 RUN apt update -yqq && apt upgrade -yqq
