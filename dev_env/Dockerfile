@@ -1,6 +1,6 @@
 # Build development environment
 
-FROM gcc:latest
+FROM ubuntu:latest
 MAINTAINER yyhclimacool "yyhclimacool@gmail.com"
 LABEL maintainer="yyhclimacool@gmail.com"
 LABEL version="0.2"
@@ -11,32 +11,33 @@ ENV IMAGE_BUILT_AT 20210101
 ENV TMP=/tmp
 ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64
 
- RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
- RUN apt-get update -yq ; exit 0
- RUN apt-get install -yq software-properties-common apt-utils && apt-get update -yq; exit 0
- RUN apt-get install -yq vim tree clang gdb make git 
- RUN apt-get install -yq automake bison flex libboost-all-dev libevent-dev
- RUN apt-get install -yq libssl-dev ssh libtool pkg-config 
- RUN apt-get install -yq default-jdk default-jre libunwind8-dev libc-ares-dev
- RUN apt-get install -yq python-numpy python-future libleveldb-dev libsnappy-dev libgoogle-perftools-dev
- RUN apt-get install -yq librdkafka-dev libapr1-dev libaprutil1-dev texinfo unzip zip 
- RUN unset TF_NEED_CUDA
+RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
+RUN apt-get update -yq ; exit 0
+RUN apt-get install -yq software-properties-common apt-utils && apt-get update -yq; exit 0
+RUN apt-get install -yq vim tree clang-11 gcc-10 gdb make git 
+RUN apt-get install -yq automake bison flex libboost-all-dev libevent-dev
+RUN apt-get install -yq libssl-dev ssh libtool pkg-config ctags wget
+RUN apt-get install -yq default-jdk default-jre libunwind8-dev libc-ares-dev
+#python-numpy python-future 
+RUN apt-get install -yq libleveldb-dev libsnappy-dev libgoogle-perftools-dev
+RUN apt-get install -yq librdkafka-dev libapr1-dev libaprutil1-dev texinfo unzip zip graphviz
+RUN unset TF_NEED_CUDA
 
-## To install go, uncomment below
-#RUN add-apt-repository ppa:longsleep/golang-backports -y
-#RUN apt-get install -yq golang-go
+# To install go, uncomment below
+RUN add-apt-repository ppa:longsleep/golang-backports -y
+RUN apt-get install -yq golang-go
 
 ## tensorflow 1.10配套的cuda版本为9.0，需要gcc5
 ## TensorFlow 1.15配套的cuda版本为10.0，需要gcc7.5
 #
 # 下面的命令可以更新gcc为8.4.0版本，更新其他版本也是类似的方法
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y
-RUN apt-get install -yq gcc-8 g++-8 
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 80 \
-      --slave /usr/bin/g++ g++ /usr/bin/g++-8 \
-      --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-8 \
-      --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-8 \
-      --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-8
+#RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y
+#RUN apt-get install -yq gcc-8 g++-8 
+#RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 80 \
+#      --slave /usr/bin/g++ g++ /usr/bin/g++-8 \
+#      --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-8 \
+#      --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-8 \
+#      --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-8
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.18.5/cmake-3.18.5-Linux-x86_64.sh && \
     bash cmake-3.18.5-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
@@ -44,6 +45,10 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.18.5/cmake-3.18.5
 
 RUN wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24.1-installer-linux-x86_64.sh && \
     bash bazel-0.24.1-installer-linux-x86_64.sh && rm -rf bazel-0.24.1-installer-linux-x86_64.sh
+
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -bfu -p /usr/local/miniconda3 && \
+    rm -rf Miniconda3-latest-Linux-x86_64.sh
 
 # CPU版本不需要cuda库
 #RUN wget -nH -m --cut-dirs=2 --ftp-user=chuanmei --ftp-password=chuanmei163Fn4/Q ftp://sa-dianxin-ftp.hz.163.org/youyunhong/cuda_10.0.130_410.48_linux.run && \
