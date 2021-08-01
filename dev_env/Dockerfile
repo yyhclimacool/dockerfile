@@ -19,7 +19,7 @@ RUN apt-get install -yq automake bison flex libboost-all-dev libevent-dev
 RUN apt-get install -yq libssl-dev ssh libtool pkg-config ctags wget
 RUN apt-get install -yq default-jdk default-jre libunwind8-dev libc-ares-dev
 #python-numpy python-future 
-RUN apt-get install -yq libleveldb-dev libsnappy-dev libgoogle-perftools-dev
+RUN apt-get install -yq libleveldb-dev libsnappy-dev libgoogle-perftools-dev libgoogle-glog-dev google-perftools
 RUN apt-get install -yq librdkafka-dev libapr1-dev libaprutil1-dev texinfo unzip zip graphviz
 RUN unset TF_NEED_CUDA
 
