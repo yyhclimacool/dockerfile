@@ -14,7 +14,7 @@ ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/li
 RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
 RUN apt-get update -yq ; exit 0
 RUN apt-get install -yq software-properties-common apt-utils && apt-get update -yq; exit 0
-RUN apt-get install -yq vim tree clang-11 gcc-10 gdb make git 
+RUN apt-get install -yq vim tree clang-11 gcc-10 gdb make git rustc
 RUN apt-get install -yq automake bison flex libboost-all-dev libevent-dev
 RUN apt-get install -yq libssl-dev ssh libtool pkg-config ctags wget
 RUN apt-get install -yq default-jdk default-jre libunwind8-dev libc-ares-dev
