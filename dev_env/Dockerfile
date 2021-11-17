@@ -7,6 +7,10 @@ LABEL version="0.2"
 LABEL description="Personal development environment"
 
 WORKDIR /root/
+
+ADD .bashrc .
+ADD .vimrc .
+
 ENV IMAGE_BUILT_AT 20210101
 ENV TMP=/tmp
 ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64
@@ -14,13 +18,47 @@ ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/li
 RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
 RUN apt-get update -yq ; exit 0
 RUN apt-get install -yq software-properties-common apt-utils && apt-get update -yq; exit 0
-RUN apt-get install -yq vim tree clang-11 gcc-10 gdb make git rustc curl
-RUN apt-get install -yq automake bison flex libboost-all-dev libevent-dev
-RUN apt-get install -yq libssl-dev ssh libtool pkg-config ctags wget ripgrep
-RUN apt-get install -yq default-jdk default-jre libunwind8-dev libc-ares-dev
-#python-numpy python-future 
-RUN apt-get install -yq libleveldb-dev libsnappy-dev libgoogle-perftools-dev libgoogle-glog-dev google-perftools
-RUN apt-get install -yq librdkafka-dev libapr1-dev libaprutil1-dev texinfo unzip zip graphviz
+
+RUN apt-get install -yq automake
+RUN apt-get install -yq bison
+RUN apt-get install -yq clang-11 
+RUN apt-get install -yq ctags
+RUN apt-get install -yq curl
+RUN apt-get install -yq default-jdk
+RUN apt-get install -yq default-jre 
+RUN apt-get install -yq flex
+RUN apt-get install -yq gcc-10 
+RUN apt-get install -yq gdb 
+RUN apt-get install -yq git
+RUN apt-get install -yq google-perftools
+RUN apt-get install -yq graphviz
+RUN apt-get install -yq libapr1-dev
+RUN apt-get install -yq libaprutil1-dev
+RUN apt-get install -yq libboost-all-dev
+RUN apt-get install -yq libc-ares-dev
+RUN apt-get install -yq libevent-dev
+RUN apt-get install -yq libgoogle-glog-dev
+RUN apt-get install -yq libgoogle-perftools-dev
+RUN apt-get install -yq libleveldb-dev
+RUN apt-get install -yq librdkafka-dev
+RUN apt-get install -yq libsnappy-dev
+RUN apt-get install -yq libssl-dev
+RUN apt-get install -yq libtool
+RUN apt-get install -yq libunwind8-dev
+RUN apt-get install -yq make
+RUN apt-get install -yq pkg-config
+#RUN apt-get install -yq python-future 
+RUN apt-get install -yq python-numpy
+RUN apt-get install -yq ripgrep
+RUN apt-get install -yq rustc
+RUN apt-get install -yq ssh
+RUN apt-get install -yq texinfo
+RUN apt-get install -yq tree 
+RUN apt-get install -yq unzip
+RUN apt-get install -yq vim 
+RUN apt-get install -yq wget
+RUN apt-get install -yq zip
+
 RUN unset TF_NEED_CUDA
 
 # To install go, uncomment below
@@ -59,13 +97,13 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
 #RUN wget -nH -m --cut-dirs=2 --ftp-user=chuanmei --ftp-password=chuanmei163Fn4/Q ftp://sa-dianxin-ftp.hz.163.org/youyunhong/libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb && \
 #    dpkg -i libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb && rm libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb
 
-RUN export PATH=/usr/local/cuda/bin:$PATH && export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64:$LD_LIBRARY_PATH
+RUN echo 'export PATH=/usr/local/cuda/bin:$PATH && export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc
 
 RUN git config --global credential.helper store && \
     git config --global user.email "yyhclimacool@gmail.com" && \
     git config --global user.name "yyhclimacool"
 
-ADD .bashrc .
-ADD .vimrc .
+RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 #CMD echo "[CMD]Welcome to my dev docker!"
 #ENTRYPOINT echo "[ENTRYPOINT]Welcome to my dev docker!"
