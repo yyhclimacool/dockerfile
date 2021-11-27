@@ -97,7 +97,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
 #RUN wget -nH -m --cut-dirs=2 --ftp-user=chuanmei --ftp-password=chuanmei163Fn4/Q ftp://sa-dianxin-ftp.hz.163.org/youyunhong/libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb && \
 #    dpkg -i libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb && rm libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb
 
-RUN echo 'export PATH=/usr/local/cuda/bin:$PATH && export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc
+RUN echo 'export PATH=/usr/local/miniconda3/bin:/usr/local/cuda/bin:$PATH && export LD_LIBRARY_PATH=/usr/local/miniconda3/lib:/usr/local/cuda/lib64:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc
 
 RUN git config --global credential.helper store && \
     git config --global user.email "yyhclimacool@gmail.com" && \
