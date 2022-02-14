@@ -40,6 +40,7 @@ RUN apt-get install -yq libevent-dev
 RUN apt-get install -yq libgoogle-glog-dev
 RUN apt-get install -yq libgoogle-perftools-dev
 RUN apt-get install -yq libleveldb-dev
+RUN apt-get install -yq libprotobuf-dev 
 RUN apt-get install -yq librdkafka-dev
 RUN apt-get install -yq libsnappy-dev
 RUN apt-get install -yq libssl-dev
@@ -47,6 +48,7 @@ RUN apt-get install -yq libtool
 RUN apt-get install -yq libunwind8-dev
 RUN apt-get install -yq make
 RUN apt-get install -yq pkg-config
+RUN apt-get install -yq protobuf-compiler
 #RUN apt-get install -yq python-future 
 RUN apt-get install -yq python-numpy
 RUN apt-get install -yq ripgrep
