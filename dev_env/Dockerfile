@@ -1,6 +1,7 @@
 # Build development environment
 
-FROM ubuntu:latest
+#FROM ubuntu:latest
+FROM arm64v8/ubuntu:latest
 MAINTAINER yyhclimacool "yyhclimacool@gmail.com"
 LABEL maintainer="yyhclimacool@gmail.com"
 LABEL version="0.2"
