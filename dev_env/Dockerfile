@@ -1,7 +1,7 @@
 # Build development environment
 
-#FROM ubuntu:latest
-FROM arm64v8/ubuntu:latest
+FROM ubuntu:latest
+#FROM arm64v8/ubuntu:latest
 MAINTAINER yyhclimacool "yyhclimacool@gmail.com"
 LABEL maintainer="yyhclimacool@gmail.com"
 LABEL version="0.2"
@@ -50,7 +50,6 @@ RUN apt-get install -yq libunwind8-dev
 RUN apt-get install -yq make
 RUN apt-get install -yq pkg-config
 RUN apt-get install -yq protobuf-compiler
-#RUN apt-get install -yq python-future 
 RUN apt-get install -yq python-numpy
 RUN apt-get install -yq ripgrep
 RUN apt-get install -yq rustc
@@ -105,6 +104,11 @@ RUN echo 'export PATH=/usr/local/miniconda3/bin:/usr/local/cuda/bin:$PATH && exp
 RUN git config --global credential.helper store && \
     git config --global user.email "yyhclimacool@gmail.com" && \
     git config --global user.name "yyhclimacool"
+
+RUN useradd -rm -d /home/kevin -s /bin/bash -g root -G sudo -u 1000 kevin \
+    && echo "kevin:kevin" | chpasswd \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+    && service ssh start
 
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
