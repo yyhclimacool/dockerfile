@@ -7,14 +7,15 @@ LABEL maintainer="yyhclimacool@gmail.com"
 LABEL version="0.2"
 LABEL description="Personal development environment"
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV IMAGE_BUILT_AT 20230303
+ENV TMP=/tmp
+ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64
+
 WORKDIR /root/
 
 ADD .bashrc .
 ADD .vimrc .
-
-ENV IMAGE_BUILT_AT 20210101
-ENV TMP=/tmp
-ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64
 
 RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
 RUN apt-get update -yq ; exit 0
@@ -23,7 +24,8 @@ RUN apt-get install -yq software-properties-common apt-utils && apt-get update -
 RUN apt-get install -yq automake
 RUN apt-get install -yq bison
 RUN apt-get install -yq clang-11 
-RUN apt-get install -yq ctags
+#RUN apt-get install -yq ctags
+RUN apt-get install -yq global
 RUN apt-get install -yq curl
 RUN apt-get install -yq default-jdk
 RUN apt-get install -yq default-jre 
@@ -50,7 +52,7 @@ RUN apt-get install -yq libunwind8-dev
 RUN apt-get install -yq make
 RUN apt-get install -yq pkg-config
 RUN apt-get install -yq protobuf-compiler
-RUN apt-get install -yq python-numpy
+#RUN apt-get install -yq python-numpy
 RUN apt-get install -yq ripgrep
 RUN apt-get install -yq rustc
 RUN apt-get install -yq ssh
@@ -112,5 +114,9 @@ RUN useradd -rm -d /home/kevin -s /bin/bash -g root -G sudo -u 1000 kevin \
 
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
 #CMD echo "[CMD]Welcome to my dev docker!"
 #ENTRYPOINT echo "[ENTRYPOINT]Welcome to my dev docker!"
