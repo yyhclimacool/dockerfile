@@ -17,6 +17,7 @@ ADD .bashrc .
 ADD .vimrc .
 
 RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
+# RUN hwclock --hctosys 
 RUN apt-get update -yq 
 RUN apt-get install -yq software-properties-common apt-utils && apt-get upgrade -yq
 
@@ -84,8 +85,8 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.18.5/cmake-3.18.5
     bash cmake-3.18.5-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
     rm -rf cmake-3.18.5-Linux-x86_64.sh
 
-RUN wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24.1-installer-linux-x86_64.sh && \
-    bash bazel-0.24.1-installer-linux-x86_64.sh && rm -rf bazel-0.24.1-installer-linux-x86_64.sh
+# RUN wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24.1-installer-linux-x86_64.sh && \
+#     bash bazel-0.24.1-installer-linux-x86_64.sh && rm -rf bazel-0.24.1-installer-linux-x86_64.sh
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     bash Miniconda3-latest-Linux-x86_64.sh -bfu -p /usr/local/miniconda3 && \
@@ -111,8 +112,8 @@ RUN useradd -rm -d /home/kevin -s /bin/bash -g root -G sudo -u 1000 kevin \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && service ssh start
 
-RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 EXPOSE 22
 
