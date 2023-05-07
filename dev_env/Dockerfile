@@ -1,14 +1,13 @@
 # Build development environment
 
-FROM ubuntu:latest
+FROM ubuntu:22.04
 #FROM arm64v8/ubuntu:latest
-MAINTAINER yyhclimacool "yyhclimacool@gmail.com"
 LABEL maintainer="yyhclimacool@gmail.com"
-LABEL version="0.2"
+LABEL version="0.1"
 LABEL description="Personal development environment"
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV IMAGE_BUILT_AT 20230303
+ENV IMAGE_BUILT_AT 20230503
 ENV TMP=/tmp
 ENV LD_LIBRARY_PATH /lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64
 
@@ -18,13 +17,13 @@ ADD .bashrc .
 ADD .vimrc .
 
 RUN ln -s /usr/local/bin/gfortran /usr/bin/gfortran
-RUN apt-get update -yq ; exit 0
-RUN apt-get install -yq software-properties-common apt-utils && apt-get update -yq; exit 0
+RUN apt-get update -yq 
+RUN apt-get install -yq software-properties-common apt-utils && apt-get upgrade -yq
 
 RUN apt-get install -yq automake
 RUN apt-get install -yq bison
 RUN apt-get install -yq clang-11 
-#RUN apt-get install -yq ctags
+# RUN apt-get install -yq ctags
 RUN apt-get install -yq global
 RUN apt-get install -yq curl
 RUN apt-get install -yq default-jdk
